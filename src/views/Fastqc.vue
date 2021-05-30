@@ -144,8 +144,8 @@ export default {
 
     async download(report){
       try {
-        let res = await this.axios.post('/storage/download', {report}, {responseType: 'blob'})
-        console.log(res)
+        let config = { headers : { token : this.$store.state.token}}
+        let res = await this.axios.post('/storage/download', config, {report}, {responseType: 'blob'})
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;

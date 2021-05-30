@@ -158,7 +158,7 @@ export default {
 
     async getDatabases(){
       try {
-        let res = await this.axios.get('/database/list/bowtie2')
+        let res = await this.axios.get('/database/find/bowtie2')
         console.log(res.data)
         this.databases = res.data.result
       
@@ -169,11 +169,12 @@ export default {
 
     async download(){
       try {
-          let res = await this.axios.get(`/storage/download/${this.result.report._id}`, {responseType: 'blob'})
+          let config = { headers : { token : this.$store.state.token}}
+          let res = await this.axios.get(`/storage/download/${this.result._id}`, config, {responseType: 'blob'})
           let url = window.URL.createObjectURL(new Blob([res.data]));
           let link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', `${this.result.report.filename}`);
+          link.setAttribute('download', `${this.result.filename}`);
           document.body.appendChild(link);
           link.click();
       } catch (error) {

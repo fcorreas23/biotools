@@ -57,7 +57,7 @@
             <v-spacer></v-spacer>
             <div v-if="user.username">
                 <v-btn text to="/storage">
-                    <span class="mr-2">Storage</span>
+                    <span class="mr-2">Mis Archivos</span>
                 </v-btn>
                 <v-divider vertical></v-divider>
 

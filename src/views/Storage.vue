@@ -2,7 +2,7 @@
     <div class="storgae">
         <v-card elevation="12" min-height="750">
             <v-card-title>Storage</v-card-title>
-            <v-card-subtitle>Almacenamiento de archivos subidos y resultados generados</v-card-subtitle>
+            <v-card-subtitle>Almacenamiento temporal de archivos subidos para análisis y resultados generados </v-card-subtitle>
             <v-card-text>
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on, attrs }">
@@ -12,7 +12,7 @@
                             v-bind="attrs"
                             v-on="on"
                         >
-                            Upload File
+                            Subir archivo
                             <v-icon right dark>mdi-cloud-upload</v-icon>
                         </v-btn>
                     </template>
@@ -58,7 +58,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue-grey" small @click="clear">Close</v-btn>
+                            <v-btn small @click="clear">Close</v-btn>
                             <v-btn
                                 :disabled="!form"
                                 class="white--text"
@@ -187,8 +187,9 @@ import { mapState, mapActions, mapGetters} from 'vuex'
 
             async deleteFile(file){
                 try {
+                    let config = { headers : { token : this.$store.state.token}}
                     confirm('Estás segura de que quieres eliminar este archivo?') &&
-                    await this.axios.delete(`/storage/delete/${file}`)
+                    await this.axios.delete(`/storage/delete/${file}`, config)
                     this.loadStorage(this.$store.state.user._id);
                 } catch (error) {
                     console.log(error)
@@ -197,7 +198,8 @@ import { mapState, mapActions, mapGetters} from 'vuex'
 
             async download(file, filename){
               try {
-                  let res = await this.axios.get(`/storage/download/${file}`, {responseType: 'blob'})
+                  let config = { headers : { token : this.$store.state.token}}
+                  let res = await this.axios.get(`/storage/download/${file}`, config, {responseType: 'blob'})
                   let url = window.URL.createObjectURL(new Blob([res.data]));
                   let link = document.createElement('a');
                   link.href = url;
