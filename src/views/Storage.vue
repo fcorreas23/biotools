@@ -1,6 +1,6 @@
 <template>
     <div class="storgae">
-        <v-card elevation="12" min-height="750">
+        <v-card elevation="6" min-height="770">
             <v-card-title>Storage</v-card-title>
             <v-card-subtitle>Almacenamiento temporal de archivos subidos para análisis y resultados generados </v-card-subtitle>
             <v-card-text>
@@ -196,16 +196,32 @@ import { mapState, mapActions, mapGetters} from 'vuex'
                 }
             },
 
-            async download(file, filename){
+           async download(file, filename){
               try {
                   let config = { headers : { token : this.$store.state.token}}
-                  let res = await this.axios.get(`/storage/download/${file}`, config, {responseType: 'blob'})
-                  let url = window.URL.createObjectURL(new Blob([res.data]));
-                  let link = document.createElement('a');
-                  link.href = url;
-                  link.setAttribute('download', `${filename}`);
-                  document.body.appendChild(link);
-                  link.click();
+
+                  await this.axios.get(`/storage/download/${file}`, config, {responseType: 'blob'})
+                  .then( (res) =>{
+                      if (!window.navigator.msSaveOrOpenBlob){
+                        // BLOB NAVIGATOR
+                        const url = window.URL.createObjectURL(new Blob([res.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', `${filename}`);
+                        document.body.appendChild(link);
+                        link.click();
+                    }else{
+                        // BLOB FOR EXPLORER 11
+                        const url = window.navigator.msSaveOrOpenBlob(new Blob([res.data]),`${filename}`);
+                    }
+                       /*  const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', `${filename}`);
+                        document.body.appendChild(link);
+                        link.click(); */
+                  })
+                  
               } catch (error) {
                   console.log(error)
               }

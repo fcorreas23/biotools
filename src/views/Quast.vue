@@ -73,13 +73,12 @@
               <v-card-text>
                 <p>QUAST stands for QUality ASsessment Tool. The tool evaluates genome assemblies by computing various metrics. This document provides instructions for the general QUAST tool for genome assemblies</p>
                 <div v-if="show">
-                  <v-btn color="blue-grey" class="ma-2 white--text" @click="download()">
+                  <v-btn color="blue-grey" class="my-3 white--text" @click="download()">
                     Download Full Report <v-icon right dark>mdi-cloud-download</v-icon>
                   </v-btn>
-
                   <v-row>
                     <v-col cols="12" sm="12" md="8">
-                        <span> statistics whit reference</span>
+                        <span class="titulo"> Statistics whit reference</span>
                        <table class="styled-table">
                         <thead>
                           <tr>
@@ -114,7 +113,7 @@
                     </v-col>
 
                     <v-col cols="12" sm="12" md="4">
-                      <span>Statistics without reference</span>
+                      <span class="titulo">Statistics without reference</span>
                       <table class="styled-table">
                         <thead>
                           <tr>
@@ -212,7 +211,8 @@ export default {
 
     async download(){
       try {
-          let res = await this.axios.get(`/storage/download/${this.result.quast._id}`, {responseType: 'blob'})
+          let config = { headers : { token : this.$store.state.token}}
+          let res = await this.axios.get(`/storage/download/${this.result.quast._id}`, config,  {responseType: 'blob'})
           let url = window.URL.createObjectURL(new Blob([res.data]));
           let link = document.createElement('a');
           link.href = url;
@@ -229,6 +229,11 @@ export default {
 </script>
 
 <style scoped>
+
+.titulo {
+  font-size: 18px;
+  font-weight: bold;
+}
 .metric-name {
   font-weight: bold;
 }

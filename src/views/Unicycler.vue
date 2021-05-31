@@ -66,10 +66,12 @@
                     <p>Unicycler is an assembly pipeline for bacterial genomes. It can assemble Illumina-only read sets where it functions as a SPAdes-optimiser. Can be run in three modes: <strong>conservative, normal (the default) and bold</strong>, set with the --mode option. Conservative mode is least likely to produce a complete assembly but has a very low risk of misassembly. Bold mode is most likely to produce a complete assembly but carries greater risk of misassembly. Normal mode is intermediate regarding both completeness and misassembly risk.</p>
                     <p>If the structural accuracy of your assembly is paramount to your research, conservative mode is recommended. If you want a completed genome, even if it contains a mistake or two, then use bold mode.</p>
                     <div v-if="loaded">
-                      <v-btn color="blue-grey" class="ma-2 white--text" @click="download()">
+                      <!-- <v-btn color="blue-grey" class="ma-2 white--text" @click="download()">
                         Download Full Report <v-icon right dark>mdi-cloud-download</v-icon>
-                      </v-btn>
-                      <pre>{{result}}</pre>
+                      </v-btn> -->
+                          <v-alert outlined type="success" text>
+                            {{result}}
+                          </v-alert>
                     </div>
                     
                 </v-card>
@@ -123,7 +125,7 @@ export default {
         this.loaded = false
         this.overlay = true
         let res = await this.axios.post('/biotools/unicycler', this.input)
-        this.result = res.data.result
+        this.result = res.data.msg
         this.overlay = false
         this.loaded = true
       } catch (error) {
