@@ -7,6 +7,9 @@
       </v-card-subtitle>
       <v-card-text>
         <p>Platanus-allee is a de novo haplotype assembler (phasing tool), which assembles each haplotype sequence in a diploid genome. Compared to the read mapping-based haplotype phasing tools, Platanus-allee is especially useful to analyze highly divergent (heterozygous) regions in which haplotypes extremely differ.</p>
+        <v-alert  border="top" colored-border type="info" elevation="2">
+           En desarrollo de interfaz web
+        </v-alert>
       </v-card-text>
     </v-card>
   </div>

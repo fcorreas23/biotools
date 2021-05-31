@@ -1,27 +1,17 @@
 <template>
-  <div class="dfast">
-      <v-card elevation="12" min-height="750">
-      <v-card-title>DFAST</v-card-title>
+  <div class="prokka">
+    <v-card elevation="6" min-height="770">
+      <v-card-title>Dfast</v-card-title>
       <v-card-subtitle>
-        <i>Yasuhiro Tanizawa, Takatomo Fujisawa, Yasukazu Nakamura</i>, <b>DFAST: a flexible prokaryotic genome annotation pipeline for faster genome</b> publication, Bioinformatics, Volume 34, Issue 6, 15 March 2018, Pages 1037–1039, <a href="https://doi.org/10.1093/bioinformatics/btx713" target="_blank">https://doi.org/10.1093/bioinformatics/btx713</a>
+        <p>DDBJ Fast Annotation and Submission Tool (DFAST) is a bacterial genome annotation pipeline integrated with quality and taxonomy assessment methods. DFAST is developed so that all the procedure required for submission can be done seamlessly on-line, thus it can be used as an on-line workspace to prepare submission files to DDBJ Mass Submission System (MSS).</p>
       </v-card-subtitle>
       <v-card-text>
-                            <p>DFAST is a flexible and customizable pipeline for prokaryotic genome annotation as well as data submission to the INSDC.</p>
+       <iframe style="display:block; width:100%; height:100vh;" src="https://dfast.ddbj.nig.ac.jp/"></iframe>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
-export default {
-  name: 'Dfast',
-  data(){
-    return {
-      
-    }
-  }
-
-}
 </script>

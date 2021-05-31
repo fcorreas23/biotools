@@ -7,6 +7,9 @@
       </v-card-subtitle>
       <v-card-text>
         <p>The MaSuRCA assembler combines the benefits of deBruijn graph and Overlap-Layout-Consensus assembly approaches. Since version 3.2.1 it supports hybrid assembly with short Illumina reads and long high error PacBio/MinION data.</p>
+        <v-alert  border="top" colored-border type="info" elevation="2">
+           En desarrollo de interfaz web y backend
+        </v-alert>
       </v-card-text>
     </v-card>
   </div>

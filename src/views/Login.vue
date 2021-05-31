@@ -1,7 +1,7 @@
 <template>
   <div class="login">
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum tempore provident ratione in maiores? Animi, corrupti nesciunt mollitia ducimus minima quidem asperiores. Commodi rem minus natus cumque nobis placeat nihil.</p>
-    <v-alert v-show="show" dense class="mx-auto" :type="type" max-width="600">{{message}}</v-alert>
+<!--     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum tempore provident ratione in maiores? Animi, corrupti nesciunt mollitia ducimus minima quidem asperiores. Commodi rem minus natus cumque nobis placeat nihil.</p>
+ -->    <v-alert v-show="show" dense class="mx-auto" :type="type" max-width="600">{{message}}</v-alert>
     <v-card class="elevation-12 mx-auto my-12" max-width="550">
       <v-toolbar dark color="deep-purple accent-4 ">
         <v-toolbar-title>Login</v-toolbar-title>

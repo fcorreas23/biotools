@@ -117,8 +117,8 @@ export default {
                 action: 'mdi-package-variant-closed',
                 title: 'Genomic Prediction',
                 items: [
-                    { title: 'DFAST', to: 'dfast' },
                     { title: 'Prokka', to: 'prokka' },
+                    { title: 'DFAST', to: 'dfast' },
                     { title: 'Augustus', to: 'augustus' },
                 ]
             },
