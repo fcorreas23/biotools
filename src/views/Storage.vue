@@ -88,7 +88,7 @@
                                 <v-chip label small>{{item.type}}</v-chip>
                             </v-card-subtitle>
                             <v-card-text>
-                                Our blouses are available in 8 colors. You can custom order a built-in arch support for any of the models.
+                               {{item.description}}
                             </v-card-text>
                             <v-card-actions>
                                 <v-btn color="red lighten-1" dark x-small elevation="3" @click="deleteFile(item._id)">Delete</v-btn>

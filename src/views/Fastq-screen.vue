@@ -83,9 +83,17 @@
               <v-card-text>
                 <p> FastQ Screen is an application which allows you to search a FastQ sequence file against a set of sequence databases and summarises the results. It is useful for incorporating into a sequencing pipeline to identify sources of contamination or mislabeled samples.</p>
                 <div v-if="show">
-                  <v-btn color="blue-grey" class="ma-2 white--text" @click="download()">
+                  <v-alert
+                    border="top"
+                    colored-border
+                    type="info"
+                    elevation="2"
+                  >
+                    {{msg}}
+                  </v-alert>
+                 <!--  <v-btn color="blue-grey" class="ma-2 white--text" @click="download()">
                         Download Full Report <v-icon right dark>mdi-cloud-download</v-icon>
-                  </v-btn>
+                  </v-btn> -->
                   <img v-bind:src="'data:image/png;base64,'+imageBytes" />
 
 
@@ -130,6 +138,7 @@ export default {
       },
       result: '',
       imageBytes: '',
+      msg: '',
     }
   },
 
@@ -148,6 +157,7 @@ export default {
         this.show = false
         let res = await this.axios.post('/biotools/fscreen', this.input)
         this.result = res.data.result.report
+        this.msg = res.data.msg
         this.imageBytes = res.data.result.img
         this.overlay = false
         this.show = true

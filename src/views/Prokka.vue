@@ -1,7 +1,7 @@
 <template>
   <div class="prokka">
     <v-card elevation="12" min-height="750">
-      <v-card-title>ProKKA</v-card-title>
+      <v-card-title>ProkkA</v-card-title>
       <v-card-subtitle>
         <p>Prokka is a software tool to annotate bacterial, archaeal and viral genomes quickly and produce standards-compliant output files.</p>
       </v-card-subtitle>
@@ -59,7 +59,8 @@
           <v-col cols="12" md="9">
             <v-card>
               <v-card-text>
-                {{result}}
+                Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using Prodigal; second, the function of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats.
+                <pre class="mt-5">{{result}}</pre>
               </v-card-text>
             </v-card>
           </v-col>
@@ -111,7 +112,7 @@ export default {
         this.overlay = true
         let res = await this.axios.post('/biotools/prokka', this.input)
         console.log(res.data)
-        this.result = res.data.result
+        this.result = res.data.result.report
         this.overlay = false
       } catch (error) {
         console.log(error.response)

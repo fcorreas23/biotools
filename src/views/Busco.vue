@@ -72,9 +72,9 @@
               <v-card-text>
                 <p>BUSCO is a tool to assess completeness of genome assembly, gene set and transcriptome. It is based on the concept of single-copy orthologs that should be highly conserved among the closely related species. For example, users who wish to study the completeness of a mammalian genome assembly will use single-copy orthologs discovered among mammalian species.</p>
                 <div v-if="show">
-                  <v-btn color="blue-grey" class="my-3 white--text" @click="download()">
+                  <!-- <v-btn color="blue-grey" class="my-3 white--text" @click="download()">
                     Download Full Report <v-icon right dark>mdi-cloud-download</v-icon>
-                  </v-btn> 
+                  </v-btn>  -->
                   <pre>{{result.info}}</pre>
                 </div>
               </v-card-text>
