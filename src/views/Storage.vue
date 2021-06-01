@@ -200,27 +200,43 @@ import { mapState, mapActions, mapGetters} from 'vuex'
               try {
                   let config = { headers : { token : this.$store.state.token}}
 
-                  await this.axios.get(`/storage/download/${file}`, config, {responseType: 'blob'})
-                  .then( (res) =>{
+                  const response = await fetch(`http://localhost:4000/api/storage/download/${file}`);
+                  const blob = await response.blob();
+                  const newBlob = new Blob([blob]);
+
+                  if(window.navigator && window.navigator.msSaveOrOpenBlob){
+                      window.navigator.msSaveOrOpenBlob(newBlob);
+                  }else{
+                      const objUrl = window.URL.createObjectURL(newBlob);
+                      const link = document.createElement('a');
+                      link.href = objUrl;
+                      link.download = filename;
+                      link.click();
+                      setTimeout(() => {
+                          window.URL.revokeObjectURL(objUrl);
+                      }, 250);
+                  }
+
+                  /* await this.axios.get(`/storage/download/${file}`, config, {responseType: 'arraybuffer'})
+                  .then( res =>{
                       if (!window.navigator.msSaveOrOpenBlob){
+                          console.log('HOLA')
                         // BLOB NAVIGATOR
-                        const url = window.URL.createObjectURL(new Blob([res.data]));
-                        const link = document.createElement('a');
+                        let url = window.URL.createObjectURL(new Blob([res.data], {type: 'application/zip'}));
+                        let link = document.createElement('a');
                         link.href = url;
                         link.setAttribute('download', `${filename}`);
                         document.body.appendChild(link);
                         link.click();
+
+                        setTimeout(() => {
+                            window.URL.revokeObjectURL(url);
+                        }, 250);
                     }else{
                         // BLOB FOR EXPLORER 11
                         const url = window.navigator.msSaveOrOpenBlob(new Blob([res.data]),`${filename}`);
                     }
-                       /*  const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', `${filename}`);
-                        document.body.appendChild(link);
-                        link.click(); */
-                  })
+                  }) */
                   
               } catch (error) {
                   console.log(error)
